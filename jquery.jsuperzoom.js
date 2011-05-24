@@ -29,8 +29,8 @@
 
                     width: "100%",
                     height: "100%",
-                    left: '0%',
-                    top: '0%',
+                    left: 0,
+                    // top: '0%',
                     opacity: 1,
                     display: 'block'
 
@@ -71,7 +71,7 @@
                     width: "100%",
                     height: "100%",
                     left: 0,
-                    top: 0,
+                    // top: 0,
                     opacity: 0,
                     display: 'block'
                 },
@@ -131,6 +131,11 @@
                     //                    });
                     //                    $(window).resize();
 
+
+										$(szLayerSel).css({
+											top: $('body').scrollTop()
+										});
+
                     $('html').css({
                         overflow: 'hidden'
                     });
@@ -143,14 +148,14 @@
 
                     $(szLayerSel).html( $(content).html() );
 
-                    config.beforeOpen();
-
                     $(config.closeBtnSelector).live('click', function() {
                         close();                        
                     });
 
                     config.animate.onOpen.height = $('body').outerHeight();
                     config.animate.onOpen.width = $('body').outerWidth();
+
+										config.beforeOpen();
 
                     $(szLayerSel).animate(
                         config.animate.onOpen,
@@ -184,7 +189,7 @@
                     config.animate.onClose,
                     config.transiction.close,
                     'linear', function() {
-                        
+
                         if (callback) {
                             callback();
                         }
@@ -241,9 +246,9 @@
                     overflow: 'hidden'
                 });
 
-                $(this).click(function() {
+                $(this).click(function(e) {
+										e.preventDefault();
                     open($(this).attr('href'));
-                    return false;
                 });
 
             //todo...
